@@ -17,22 +17,14 @@ class StudentList(viewsets.ModelViewSet):
     serializer_class = StudentSerializer
 
 
-# class StudentDetail(viewsets.ModelViewSet):
-#     queryset = Student.objects.all()
-#     serializer_class = StudentSerializer
 
 
-
-# View Products within a certain product type
+# Get Student on Login
 class StudentDetailViewSet(generics.ListAPIView):
     serializer_class = StudentSerializer
     model = Student
 
     def get_queryset(self):
-        """
-        Optionally restricts the returned purchases to a given user,
-        by filtering against a `username` query parameter in the URL.
-        """
         queryset = Student.objects.all()
         username = self.request.query_params.get('username', None)
         if username is not None:
@@ -40,7 +32,7 @@ class StudentDetailViewSet(generics.ListAPIView):
         return queryset
 
 
-
+# Get loggin in student's courses
 class StudentCoursesViewSet(generics.ListAPIView):
     serializer_class = StudentCourseSerializer
     model = StudentCourse
@@ -57,6 +49,7 @@ class StudentCoursesViewSet(generics.ListAPIView):
 
         return queryset
 
+# Get logged in student's course's assignments
 class StudentCourseAssignmentsViewSet(generics.ListAPIView):
     serializer_class = StudentCourseAssignmentSerializer
     model = StudentCourseAssignment
