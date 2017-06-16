@@ -4,6 +4,7 @@ from .serializer_professor import ProfessorSerializer
 from .serializer_course import CourseSerializer
 from .serializer_student_course import StudentCourseSerializer
 from .serializer_assignment import AssignmentSerializer
+from .serializer_student_course_assignment import StudentCourseAssignmentSerializer
 
 __all__ = [
     'StudentSerializer',
@@ -12,5 +13,6 @@ __all__ = [
     'ProfessorSerializer',
     'CourseSerializer',
     'StudentCourseSerializer',
-    'AssignmentSerializer'
+    'AssignmentSerializer',
+    'StudentCourseAssignmentSerializer'
 ]

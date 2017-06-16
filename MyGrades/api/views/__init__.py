@@ -1,4 +1,4 @@
-from .view_student import StudentList, StudentDetailViewSet, StudentCoursesViewSet
+from .view_student import StudentList, StudentDetailViewSet, StudentCoursesViewSet, StudentCourseAssignmentsViewSet
 from .view_register import register_user
 from .view_logout import user_logout
 from .view_school import SchoolList
@@ -19,4 +19,5 @@ __all__ = [
     'StudentDetailViewSet',
     'StudentCoursesViewSet',
     'AssignmentList',
+    'StudentCourseAssignmentsViewSet',
 ]

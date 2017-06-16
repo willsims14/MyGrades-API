@@ -1,5 +1,5 @@
-from api.models import Student, StudentCourse
-from api.serializers import StudentSerializer, AdminStudentSerializer, StudentCourseSerializer
+from api.models import Student, StudentCourse, StudentCourseAssignment
+from api.serializers import StudentSerializer, AdminStudentSerializer, StudentCourseSerializer, StudentCourseAssignmentSerializer
 from rest_framework import viewsets
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -57,28 +57,14 @@ class StudentCoursesViewSet(generics.ListAPIView):
 
         return queryset
 
+class StudentCourseAssignmentsViewSet(generics.ListAPIView):
+    serializer_class = StudentCourseAssignmentSerializer
+    model = StudentCourseAssignment
 
-# @api_view(['GET', 'PUT', 'DELETE'])
-# def ProductDetailViewSet(request, student_id):
-#         try:
-#             courses = StudentCourse.objects.all()
-#             print("\n\n{}\n\n".format(courses))
-#         except StudentCourse.DoesNotExist:
-#             return Response(status=status.HTTP_404_NOT_FOUND)
+    def get_queryset(self):
+        queryset = StudentCourseAssignment.objects.all()
+        course_pk = float(self.request.query_params.get('course_id', None))
+        if course_pk is not None:
+            queryset = StudentCourseAssignment.objects.filter(student_course=course_pk)
 
-#         if request.method == 'GET':
-#             courses = courses.filter(student=student_id)
-#             serializer = StudentCourseSerializer(courses, context={'request': request})
-#             return Response(serializer.data)
-
-#         elif request.method == 'PUT':
-#             serializer = StudentCourseSerializer(courses, data=request.data)
-#             if serializer.is_valid():
-#                 serializer.save()
-#                 return Response(serializer.data)
-#             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-#         elif request.method == "DELETE":
-#             print("\n\n\n\nDELETEING\n\n\n\n\n")
-#             courses.delete()
-#             return Response(status=status.HTTP_204_NO_CONTENT)
+        return queryset
