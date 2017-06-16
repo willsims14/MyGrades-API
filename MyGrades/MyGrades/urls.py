@@ -1,0 +1,31 @@
+"""
+    MyGrades URL Configuration
+"""
+from django.conf.urls import url, include
+from django.contrib import admin
+from api import views
+from rest_framework import routers
+from rest_framework.authtoken.views import obtain_auth_token
+
+
+router = routers.DefaultRouter()
+
+router.register(r'students', views.StudentList)
+router.register(r'schools', views.SchoolList)
+router.register(r'professors', views.ProfessorList)
+router.register(r'courses', views.CourseList)
+router.register(r'assignments', views.AssignmentList)
+
+
+app_name = "MyGrades"
+
+urlpatterns = [
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api-token-auth/', obtain_auth_token),
+    url(r'^', include(router.urls)),
+    url(r'^admin/', admin.site.urls),
+    url(r'^register$', views.register_user, name='register'),
+    url(r'^student/detail/', views.StudentDetailViewSet.as_view()),
+    url(r'^student-courses/', views.StudentCoursesViewSet.as_view())
+
+]
