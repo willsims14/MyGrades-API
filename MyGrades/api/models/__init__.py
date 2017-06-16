@@ -14,5 +14,6 @@ __all__ = [
     'Professor',
     'Course',
     'Assignment',
-    'StudentCourse'
+    'StudentCourse',
+    'StudentCourseAssignment'
 ]

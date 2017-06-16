@@ -1,9 +1,6 @@
-
 from django.db import models
 from django.contrib.auth.models import User
 from api.models import Professor, StudentCourse, Assignment
-
-
 
 
 class StudentCourseAssignment(models.Model):
@@ -14,4 +11,4 @@ class StudentCourseAssignment(models.Model):
 
 
     def __str__(self):
-        return str(self.title)
+        return str(self.assignment.title)
