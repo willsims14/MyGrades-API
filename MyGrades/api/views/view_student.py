@@ -1,15 +1,8 @@
-from api.models import Student, StudentCourse, StudentCourseAssignment
-from api.serializers import StudentSerializer, AdminStudentSerializer, StudentCourseSerializer, StudentCourseAssignmentSerializer
+from api.models import Student
+from api.serializers import StudentSerializer
+
 from rest_framework import viewsets
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from rest_framework import generics
-from rest_framework.authtoken.models import Token
-import json
-
-
-
-
 
 
 class StudentList(viewsets.ModelViewSet):
@@ -17,12 +10,11 @@ class StudentList(viewsets.ModelViewSet):
     serializer_class = StudentSerializer
 
 
-
-
 # Get Student on Login
 class StudentDetailViewSet(generics.ListAPIView):
     serializer_class = StudentSerializer
     model = Student
+
 
     def get_queryset(self):
         queryset = Student.objects.all()
@@ -31,33 +23,3 @@ class StudentDetailViewSet(generics.ListAPIView):
             queryset = queryset.filter(user__username=username)
         return queryset
 
-
-# Get loggin in student's courses
-class StudentCoursesViewSet(generics.ListAPIView):
-    serializer_class = StudentCourseSerializer
-    model = StudentCourse
-
-    def get_queryset(self):
-        """
-        Optionally restricts the returned purchases to a given user,
-        by filtering against a `username` query parameter in the URL.
-        """
-        queryset = StudentCourse.objects.all()
-        pk = float(self.request.query_params.get('student_id', None))
-        if pk is not None:
-            queryset = StudentCourse.objects.filter(student=pk)
-
-        return queryset
-
-# Get logged in student's course's assignments
-class StudentCourseAssignmentsViewSet(generics.ListAPIView):
-    serializer_class = StudentCourseAssignmentSerializer
-    model = StudentCourseAssignment
-
-    def get_queryset(self):
-        queryset = StudentCourseAssignment.objects.all()
-        course_pk = float(self.request.query_params.get('course_id', None))
-        if course_pk is not None:
-            queryset = StudentCourseAssignment.objects.filter(student_course=course_pk)
-
-        return queryset
