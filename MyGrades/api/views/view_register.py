@@ -13,7 +13,9 @@ def register_user(request):
     # Create a new user by invoking the `create_user` helper method on Django's built-in User model
     new_user = User.objects.create_user(
                     username=req_body['username'],
-                    password=req_body['password'])
+                    password=req_body['password'],
+                    first_name=req_body['first_name'],
+                    last_name=req_body['last_name'])
 
     # Commit the user to the database by saving it
     new_user.save()

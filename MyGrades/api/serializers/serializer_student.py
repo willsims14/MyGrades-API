@@ -7,10 +7,12 @@ class StudentSerializer(serializers.HyperlinkedModelSerializer):
 
 
     id = serializers.IntegerField(read_only=True)
+    first_name = serializers.CharField(source='user.first_name')
+    last_name = serializers.CharField(source='user.last_name')
 
     class Meta:
         model = Student
-        exclude = ('url', 'user',)
+        fields = ['id', 'first_name', 'last_name', 'school']
 
 
 class AdminStudentSerializer(serializers.HyperlinkedModelSerializer):

@@ -1,4 +1,4 @@
-from .view_student import StudentList, StudentDetailViewSet
+from .view_student import StudentList, StudentDetailViewSet, GetStudentByTokenView
 from .view_student_course import StudentCoursesViewSet, StudentCourseAssignmentsViewSet, DeleteCourseViewSet
 from .view_register import register_user
 from .view_logout import user_logout
@@ -23,5 +23,6 @@ __all__ = [
     'AssignmentList',
     'StudentCourseAssignmentsViewSet',
     'CourseView',
-    'DeleteCourseViewSet'
+    'DeleteCourseViewSet',
+    'GetStudentByTokenView'
 ]
