@@ -18,11 +18,23 @@ class CourseView(APIView):
         
         req_body = json.loads(request.body.decode())
 
-        # Get instances of objects using foreign keys
-        # product_type_pk = int(req_body['product_type'][0]);
-        # product_type = ProductType.objects.get(pk=product_type_pk)
+        ###############################################
+        ###############################################
+        ## IF PROFESSOR INSTANCE EXISTS GRAB THAT #####
+        ###############################################
+        ###############################################
+        # temp_professor = Professor.objects.get(name=req_body.professor)
 
-        print("\n\nBody: {}\n\n".format(req_body))
+        # if temp_professor:
+        #     print("\n\nIS PROFESSOR\n\n")
+        # else:
+        #     print("\n\nNOT PROFESSOR\n\n")
+
+        #     new_professor = Professor.objects.create(
+        #         name = req_body['professor'],
+        #         school = '',
+        #         email = ''
+        #     )
 
         new_course = Course.objects.create(
             title = req_body['title'],
@@ -31,9 +43,7 @@ class CourseView(APIView):
         )
 
         token = Token.objects.get(user=request.user)
-        print("\n\n\n{}\n\n".format(token.key))
         data = json.dumps({'token':token.key})
-        print("\n\nData:{}\n\n".format(data))
 
         try:
             new_course.save()
@@ -41,14 +51,3 @@ class CourseView(APIView):
         except:
             print('\n\nuh oh \n\n', new_course)
             return Response(status=status.HTTP_400_BAD_REQUEST)
-
-
-    # Course ##################################
-        # title = models.CharField(max_length=50)
-        # course_number = models.CharField(max_length=50, blank=True, null=True)
-        # professor = models.ForeignKey(Professor)
-
-    # Student Course ##########################
-        # student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='student_in_course')
-        # course = models.ForeignKey(Course, on_delete=models.CASCADE)
-        # assignments = models.ManyToManyField(Assignment, through='StudentCourseAssignment')
