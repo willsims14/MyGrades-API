@@ -36,10 +36,16 @@ class CourseView(APIView):
         #         email = ''
         #     )
 
+
         new_course = Course.objects.create(
             title = req_body['title'],
             course_number = req_body['course_number'],
             professor = req_body['professor'],
+        )
+
+        new_student_course = StudentCourse.objects.create(
+            student = request.user.student,
+            course = new_course
         )
 
         token = Token.objects.get(user=request.user)
