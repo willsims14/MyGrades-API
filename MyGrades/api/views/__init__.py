@@ -5,6 +5,7 @@ from .view_school import SchoolList
 from .view_professor import ProfessorList
 from .view_course import CourseList, CourseDetail
 from .view_assignment import AssignmentList
+from .view_create_course import CourseView
 
 
 __all__ = [
@@ -20,4 +21,5 @@ __all__ = [
     'StudentCoursesViewSet',
     'AssignmentList',
     'StudentCourseAssignmentsViewSet',
+    'CourseView'
 ]

@@ -27,7 +27,8 @@ urlpatterns = [
     url(r'^register$', views.register_user, name='register'),
     url(r'^student/detail/', views.StudentDetailViewSet.as_view()),
     url(r'^student-course/', views.StudentCoursesViewSet.as_view()),
-    url(r'^student-course-assignments/', views.StudentCourseAssignmentsViewSet.as_view())
+    url(r'^student-course-assignments/', views.StudentCourseAssignmentsViewSet.as_view()),
+    url(r'^create-course/', views.CourseView.as_view())
 
 
 ]
