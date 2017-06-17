@@ -8,6 +8,7 @@ from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 
 
+
 router = routers.DefaultRouter()
 
 router.register(r'students', views.StudentList)
@@ -30,6 +31,8 @@ urlpatterns = [
     url(r'^student-course-assignments/', views.StudentCourseAssignmentsViewSet.as_view()),
     url(r'^student-course-delete/(?P<pk>[0-9]+)/$', views.DeleteCourseViewSet),
     url(r'^create-course/', views.CourseView.as_view()),
+    url(r'^getstudent/(?P<token>\w+)/', views.GetStudentByTokenView.as_view())
 
 
 ]
+
