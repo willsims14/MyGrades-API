@@ -20,6 +20,9 @@ class AssignmentView(APIView):
         # Decode json
         req_body = json.loads(request.body.decode())
 
+
+        print("\n\n{}\n\n".format(student_course_pk))
+
         # Get instances of objects
         student_course = StudentCourse.objects.get(course=student_course_pk)
         course = student_course.course

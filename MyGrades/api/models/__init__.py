@@ -6,6 +6,7 @@ from .model_course import Course
 from .model_assignment import Assignment
 from .model_student_course_assignment import StudentCourseAssignment
 from .model_student import Student
+from .model_semester import Semester
 
 
 __all__ = [
@@ -15,5 +16,6 @@ __all__ = [
     'Course',
     'Assignment',
     'StudentCourse',
-    'StudentCourseAssignment'
+    'StudentCourseAssignment',
+    'Semester'
 ]

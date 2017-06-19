@@ -32,8 +32,8 @@ urlpatterns = [
     url(r'^student-course-delete/(?P<pk>[0-9]+)/$', views.DeleteCourseViewSet),
     url(r'^create-course/', views.CourseView.as_view()),
     url(r'^getstudent/(?P<token>\w+)/', views.GetStudentByTokenView.as_view()),
-    url(r'^create-assignment/(?P<student_course_pk>[0-9]+)/$', views.AssignmentView.as_view())
-
+    url(r'^create-assignment/(?P<student_course_pk>[0-9]+)/$', views.AssignmentView.as_view()),
+    url(r'^semesters/', views.SemesterViewSet.as_view())
 
 ]
 

@@ -8,6 +8,7 @@ from .view_course import CourseList, CourseDetail
 from .view_assignment import AssignmentList
 from .view_create_course import CourseView
 from .view_create_assignment import AssignmentView
+from .view_semester import SemesterViewSet
 
 
 __all__ = [
@@ -26,5 +27,6 @@ __all__ = [
     'CourseView',
     'DeleteCourseViewSet',
     'GetStudentByTokenView',
-    'AssignmentView'
+    'AssignmentView',
+    'SemesterViewSet'
 ]
