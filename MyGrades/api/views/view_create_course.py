@@ -26,9 +26,8 @@ class CourseView(APIView):
         # temp_professor = Professor.objects.get(name=req_body.professor)
 
         # if temp_professor:
-        #     print("\n\nIS PROFESSOR\n\n")
+        #       get_professor()
         # else:
-        #     print("\n\nNOT PROFESSOR\n\n")
 
         #     new_professor = Professor.objects.create(
         #         name = req_body['professor'],
@@ -59,5 +58,4 @@ class CourseView(APIView):
             new_student_course.save()
             return Response(data, content_type='application/json')
         except:
-            print('\n\nuh oh \n\n', new_course)
             return Response(status=status.HTTP_400_BAD_REQUEST)

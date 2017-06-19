@@ -21,7 +21,6 @@ class AssignmentView(APIView):
         req_body = json.loads(request.body.decode())
 
 
-        print("\n\n{}\n\n".format(student_course_pk))
 
         # Get instances of objects
         student_course = StudentCourse.objects.get(course=student_course_pk)
@@ -50,5 +49,4 @@ class AssignmentView(APIView):
             new_student_assignment.save()
             return Response(data, content_type='application/json')
         except:
-            print('\n\nuh oh \n\n', new_course)
             return Response(status=status.HTTP_400_BAD_REQUEST)

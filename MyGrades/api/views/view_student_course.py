@@ -56,9 +56,7 @@ def DeleteCourseViewSet(request, pk):
 
     try:
         student_course = StudentCourse.objects.get(pk=pk)
-        print("\n\nCourse: {}\n\n".format(student_course))
     except StudentCourse.DoesNotExist:
-        print("\n\nCOURSE DOES NOT EXIST")
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     # if request.method == 'GET':
