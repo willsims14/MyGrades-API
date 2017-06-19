@@ -30,7 +30,6 @@ class StudentDetailViewSet(generics.ListAPIView):
 
 class GetStudentByTokenView(APIView):
     def get(self, request, token, format=None):
-        print("\n\nToken: {}\n\n".format(token))
         try:
             token_obj = Token.objects.get(pk=token)
             user = User.objects.get(pk=token_obj.user.id)
