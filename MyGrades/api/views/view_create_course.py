@@ -37,6 +37,8 @@ class CourseView(APIView):
         #     )
 
 
+        semester_from_db = Semester.objects.get(pk=req_body['semester'])
+
         new_course = Course.objects.create(
             title = req_body['title'],
             course_number = req_body['course_number'],
@@ -45,7 +47,8 @@ class CourseView(APIView):
 
         new_student_course = StudentCourse.objects.create(
             student = request.user.student,
-            course = new_course
+            course = new_course,
+            semester = semester_from_db
         )
 
         token = Token.objects.get(user=request.user)
@@ -53,6 +56,7 @@ class CourseView(APIView):
 
         try:
             new_course.save()
+            new_student_course.save()
             return Response(data, content_type='application/json')
         except:
             print('\n\nuh oh \n\n', new_course)
