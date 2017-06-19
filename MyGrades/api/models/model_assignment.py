@@ -6,7 +6,6 @@ from .model_course import Course
 
 class Assignment(models.Model):
     title = models.CharField(max_length=50)
-    description = models.CharField(max_length=255, blank=True, null=True)
     course = models.ForeignKey(Course)
     points_possible = models.DecimalField(max_digits=9, decimal_places=2)
 

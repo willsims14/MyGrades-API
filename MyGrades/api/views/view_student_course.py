@@ -62,7 +62,7 @@ def DeleteCourseViewSet(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     # if request.method == 'GET':
-    #     serializer = ProductSerializer(product, context={'request': request})
+    #     serializer = StudentCourseSerializer(product, context={'request': request})
     #     return Response(serializer.data)
 
     # elif request.method == 'PUT':
@@ -73,8 +73,8 @@ def DeleteCourseViewSet(request, pk):
     #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     if request.method == "DELETE":
-        print("\n\n\n\nDELETEING\n\n\n\n\n")
         course = Course.objects.get(pk=student_course.course.id)
         student_course.delete()
+
         course.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
