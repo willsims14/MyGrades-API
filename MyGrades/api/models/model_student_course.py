@@ -11,6 +11,7 @@ class StudentCourse(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     assignments = models.ManyToManyField(Assignment, through='StudentCourseAssignment')
     semester = models.ForeignKey(Semester, on_delete=models.CASCADE)
+    description = models.CharField(max_length=255)
 
     # def __str__(self):
     #     return self.student.user.first_name + ": " + self.course.title

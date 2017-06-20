@@ -47,7 +47,8 @@ class CourseView(APIView):
         new_student_course = StudentCourse.objects.create(
             student = request.user.student,
             course = new_course,
-            semester = semester_from_db
+            semester = semester_from_db,
+            description = req_body['description']
         )
 
         token = Token.objects.get(user=request.user)
