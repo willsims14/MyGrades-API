@@ -33,9 +33,16 @@ class AssignmentView(APIView):
             points_possible = float(req_body['points_possible'])
         )
 
+        try:
+            temp_points_received = float(req_body['points_received'])
+        except:
+            temp_points_received = None
+
+        print("\n\n{}\n\n".format(temp_points_received))
+
         # Create StudentCourseAssignment Object
         new_student_assignment = StudentCourseAssignment.objects.create(
-            points_received = float(req_body['points_received']),
+            points_received = temp_points_received,
             description = req_body['description'],
             student_course = student_course,
             assignment = new_assignment

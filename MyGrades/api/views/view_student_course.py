@@ -42,7 +42,13 @@ class StudentCourseAssignmentsViewSet(generics.ListAPIView):
 
     def get_queryset(self):
         queryset = StudentCourseAssignment.objects.all()
-        course_pk = float(self.request.query_params.get('course_id', None))
+        try:
+            course_pk = float(self.request.query_params.get('course_id', None))
+        except:
+            student_courses = StudentCourse.objects.filter(student=self.request.user.student)
+            queryset = StudentCourseAssignment.objects.filter(student_course__student=self.request.user.student)
+            return queryset
+
         if course_pk is not None:
             queryset = StudentCourseAssignment.objects.filter(student_course=course_pk)
 
