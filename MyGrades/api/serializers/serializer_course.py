@@ -4,6 +4,7 @@ from api.models import Course
 
 
 class CourseSerializer(serializers.HyperlinkedModelSerializer):
+    title = serializers.CharField(read_only=True)
     class Meta:
         model = Course
         exclude = ()
