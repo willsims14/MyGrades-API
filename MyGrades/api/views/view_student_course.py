@@ -57,6 +57,9 @@ class StudentCourseAssignmentsViewSet(generics.ListAPIView):
 
 
 
+
+
+
 @api_view(['GET', 'PUT', 'DELETE'])
 def DeleteCourseViewSet(request, pk):
 
@@ -65,9 +68,9 @@ def DeleteCourseViewSet(request, pk):
     except StudentCourse.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    # if request.method == 'GET':
-    #     serializer = StudentCourseSerializer(product, context={'request': request})
-    #     return Response(serializer.data)
+    if request.method == 'GET':
+        serializer = StudentCourseSerializer(student_course, context={'request': request})
+        return Response(serializer.data)
 
     # elif request.method == 'PUT':
     #     serializer = ProductSerializer(product, data=request.data)
@@ -76,7 +79,7 @@ def DeleteCourseViewSet(request, pk):
     #         return Response(serializer.data)
     #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    if request.method == "DELETE":
+    elif request.method == "DELETE":
         course = Course.objects.get(pk=student_course.course.id)
         student_course.delete()
 

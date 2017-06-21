@@ -1,44 +1,65 @@
-from api.models import Assignment, StudentCourseAssignment
+from api.models import Assignment, StudentCourseAssignment, StudentCourse
 from api.serializers import AssignmentSerializer
 from rest_framework import viewsets
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
+from rest_framework.authtoken.models import Token
+from rest_framework.views import APIView
+from rest_framework import status
+import json
 
 
+class AssignmentView(APIView):
 
-class AssignmentList(viewsets.ModelViewSet):
     queryset = Assignment.objects.all()
     serializer_class = AssignmentSerializer
 
-class AssignmentDetail(viewsets.ModelViewSet):
-    queryset = Assignment.objects.all()
-    serializer_class = AssignmentSerializer
+    def post(self, request, student_course_pk, format=None):
+        # Decode json
+        req_body = json.loads(request.body.decode())
 
+        # Get instances of objects
+        student_course = StudentCourse.objects.get(course=student_course_pk)
+        course = student_course.course
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def DeleteAssignmentViewSet(request, pk):
+        # Create Assignment Object
+        new_assignment = Assignment.objects.create(
+            title = req_body['title'],
+            course = course,
+            points_possible = float(req_body['points_possible'])
+        )
 
-    try:
-        student_assignment = StudentCourseAssignment.objects.get(pk=pk)
-    except StudentCourse.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        try:
+            temp_points_received = float(req_body['points_received'])
+        except:
+            temp_points_received = None
 
-    # if request.method == 'GET':
-    #     serializer = StudentCourseSerializer(product, context={'request': request})
-    #     return Response(serializer.data)
+        # Create StudentCourseAssignment Object
+        new_student_assignment = StudentCourseAssignment.objects.create(
+            points_received = temp_points_received,
+            description = req_body['description'],
+            student_course = student_course,
+            assignment = new_assignment
+        )
 
-    # elif request.method == 'PUT':
-    #     serializer = ProductSerializer(product, data=request.data)
-    #     if serializer.is_valid():
-    #         serializer.save()
-    #         return Response(serializer.data)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        token = Token.objects.get(user=request.user)
+        data = json.dumps({'token':token.key})
 
-    if request.method == "DELETE":
-        # course = Course.objects.get(pk=student_assignment.course.id)
-        student_assignment.delete()
-        student_assignment.assignment.delete()
+        try:
+            new_assignment.save()
+            new_student_assignment.save()
+            return Response(data, content_type='application/json')
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+    def delete(self, request, pk, format=None):
+        try:
+            assignment = StudentCourseAssignment.objects.get(pk=pk)     # Get student assignment
+            assignment.assignment.delete()                              # Delete Assignment instance attached to the StudentAssignment
+            assignment.delete()                                         # Then delete the StudentAssignment
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+            
+
