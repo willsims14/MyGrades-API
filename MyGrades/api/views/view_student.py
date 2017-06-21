@@ -14,12 +14,6 @@ class StudentList(viewsets.ModelViewSet):
     serializer_class = StudentSerializer
 
 
-# Get Student on Login
-class StudentDetailViewSet(generics.ListAPIView):
-    serializer_class = StudentSerializer
-    model = Student
-
-
     def get_queryset(self):
         queryset = Student.objects.all()
         username = self.request.query_params.get('username', None)
