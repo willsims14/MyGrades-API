@@ -16,57 +16,21 @@ class AssignmentView(APIView):
     serializer_class = AssignmentSerializer
 
 
-    def get_object(self):
+    def get_object(self, pk=None):
         try:
-            return StudentCourseAssignment.objects.filter(student_course__student=self.request.user.student)
+            if pk is not None:
+                return StudentCourseAssignment.objects.filter(student_course__student=self.request.user.student, student_course=pk)
+            else:
+                return StudentCourseAssignment.objects.filter(student_course__student=self.request.user.student)
         except StudentCourseAssignment.DoesNotExist:
             raise Http404
 
-    def get(self, request, format=None):
-        student_course_assignments = self.get_object()
+    def get(self, request, pk=None, format=None):
+        pk = self.request.query_params.get('course_id', None)
+        print("\n\nPK{}\n\n".format(pk))
+        student_course_assignments = self.get_object(pk)
         serializer = StudentCourseAssignmentSerializer(student_course_assignments, many=True)
         return Response(serializer.data)
-
-
-
-
-    # def get_queryset(self):
-    #     queryset = StudentCourseAssignment.objects.all()
-    #     try:
-    #         course_pk = float(self.request.query_params.get('course_id', None))
-    #     except:
-    #         student_courses = StudentCourse.objects.filter(student=self.request.user.student)
-    #         queryset = StudentCourseAssignment.objects.filter(student_course__student=self.request.user.student)
-    #         return queryset
-
-    #     if course_pk is not None:
-    #         queryset = StudentCourseAssignment.objects.filter(student_course=course_pk)
-
-    #     return queryset
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     def post(self, request, student_course_pk, format=None):
         # Decode json

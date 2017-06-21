@@ -17,25 +17,7 @@ class CourseView(APIView):
     def post(self, request, format=None):
         
         req_body = json.loads(request.body.decode())
-
-        ###############################################
-        ###############################################
-        ## IF PROFESSOR INSTANCE EXISTS GRAB THAT #####
-        ###############################################
-        ###############################################
-        # temp_professor = Professor.objects.get(name=req_body.professor)
-
-        # if temp_professor:
-        #       get_professor()
-        # else:
-
-        #     new_professor = Professor.objects.create(
-        #         name = req_body['professor'],
-        #         school = '',
-        #         email = ''
-        #     )
-
-
+        
         semester_from_db = Semester.objects.get(pk=req_body['semester'])
 
         new_course = Course.objects.create(
