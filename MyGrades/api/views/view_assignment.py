@@ -1,5 +1,5 @@
 from api.models import Assignment, StudentCourseAssignment, StudentCourse
-from api.serializers import AssignmentSerializer
+from api.serializers import AssignmentSerializer, StudentCourseAssignmentSerializer
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
@@ -14,6 +14,59 @@ class AssignmentView(APIView):
 
     queryset = Assignment.objects.all()
     serializer_class = AssignmentSerializer
+
+
+    def get_object(self):
+        try:
+            return StudentCourseAssignment.objects.filter(student_course__student=self.request.user.student)
+        except StudentCourseAssignment.DoesNotExist:
+            raise Http404
+
+    def get(self, request, format=None):
+        student_course_assignments = self.get_object()
+        serializer = StudentCourseAssignmentSerializer(student_course_assignments, many=True)
+        return Response(serializer.data)
+
+
+
+
+    # def get_queryset(self):
+    #     queryset = StudentCourseAssignment.objects.all()
+    #     try:
+    #         course_pk = float(self.request.query_params.get('course_id', None))
+    #     except:
+    #         student_courses = StudentCourse.objects.filter(student=self.request.user.student)
+    #         queryset = StudentCourseAssignment.objects.filter(student_course__student=self.request.user.student)
+    #         return queryset
+
+    #     if course_pk is not None:
+    #         queryset = StudentCourseAssignment.objects.filter(student_course=course_pk)
+
+    #     return queryset
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     def post(self, request, student_course_pk, format=None):
         # Decode json

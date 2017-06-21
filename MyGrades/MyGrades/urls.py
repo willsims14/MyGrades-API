@@ -32,10 +32,14 @@ urlpatterns = [
     url(r'^student-course/', views.StudentCoursesViewSet.as_view()),
     url(r'^create-course/', views.CourseView.as_view()),
     url(r'^student-course-delete/(?P<pk>[0-9]+)/$', views.DeleteCourseViewSet),
-    
-    url(r'^create-assignment/(?P<student_course_pk>[0-9]+)/$', views.AssignmentView.as_view()),
-    url(r'^student-course-assignments/', views.StudentCourseAssignmentsViewSet.as_view()),
-    url(r'^student-assignment-delete/(?P<pk>[0-9]+)/$', views.AssignmentView.as_view()),
+
+
+    url(r'^assignment/delete/(?P<pk>[0-9]+)/$', views.AssignmentView.as_view()),
+    url(r'^assignment/new/(?P<student_course_pk>[0-9]+)/$', views.AssignmentView.as_view()),
+    url(r'^student-course-assignments/', views.AssignmentView.as_view()),
+
+
+    # url(r'^student-course-assignments/', views.StudentCourseAssignmentsViewSet.as_view()),
 
 
 
