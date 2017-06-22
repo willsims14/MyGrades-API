@@ -2,11 +2,10 @@
 #### Will Sims, March, 2017
 
 ## What It Does
-MyGrades is an application for students to keeps track of the grades he or she receive in their college or highschool courses.
+The MyGrades API is a RESTful API for developers to create apps for students to keep track of the grades he or she receive in their college or highschool courses.
 
-## Coming Soon
- * __Student can calculates their GPA__
- * __The "What Do I Need" Feature__: allows a student to calculate a grade that they need to get on an upcoming assignment (homework, exam, project, etc.) in order to get a specific grade (that the user inputs) in the course.
+## My Front End Repo
+https://github.com/willsims14/My-Grades-2.0
 
 ## Dependencies
 You need to do a few things in order to use the MyGrades API:
