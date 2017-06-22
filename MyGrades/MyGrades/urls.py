@@ -29,12 +29,11 @@ urlpatterns = [
 
     url(r'^getstudent/(?P<token>\w+)/', views.GetStudentByTokenView.as_view()),
 
-    url(r'^student-course/', views.StudentCoursesViewSet.as_view()),
-    url(r'^student-course-delete/(?P<pk>[0-9]+)/$', views.StudentCourseDetail.as_view()),
 
-    # url(r'^create-course/', views.StudentCourseDetail.as_view()),
+
+    url(r'^student-course/(?P<pk>[0-9]+)/$', views.CourseView.as_view()),
+    url(r'^student-course-delete/(?P<pk>[0-9]+)/$', views.CourseView.as_view()),
     url(r'^create-course/', views.CourseView.as_view()),
-
 
     url(r'^assignment/delete/(?P<pk>[0-9]+)/$', views.AssignmentView.as_view()),
     url(r'^assignment/new/(?P<student_course_pk>[0-9]+)/$', views.AssignmentView.as_view()),

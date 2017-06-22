@@ -1,15 +1,16 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from api.models import StudentCourse
-from .serializer_student_course_assignment import StudentCourseAssignmentSerializer
+from api.serializers import StudentSerializer
 
 
 class StudentCourseSerializer(serializers.ModelSerializer):
 
     id = serializers.IntegerField(read_only=True)
-    course = serializers.CharField(source='course.title', read_only=True)
+    course = serializers.CharField( read_only=True)
     description = serializers.CharField(read_only=True)
-    # assignments = StudentCourseAssignmentSerializer(many=True)
+    semester = serializers.CharField(read_only=True)
+    student = serializers.CharField(read_only=True)
 
     class Meta:
         model = StudentCourse

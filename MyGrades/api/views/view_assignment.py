@@ -27,7 +27,6 @@ class AssignmentView(APIView):
 
     def get(self, request, pk=None, format=None):
         pk = self.request.query_params.get('course_id', None)
-        print("\n\nPK{}\n\n".format(pk))
         student_course_assignments = self.get_object(pk)
         serializer = StudentCourseAssignmentSerializer(student_course_assignments, many=True)
         return Response(serializer.data)
@@ -36,7 +35,6 @@ class AssignmentView(APIView):
         # Decode json
         req_body = json.loads(request.body.decode())
 
-        print("\n\n{}\n\n".format(student_course_pk))
 
         # Get instances of objects
         student_course = StudentCourse.objects.get(pk=student_course_pk)
