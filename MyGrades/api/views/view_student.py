@@ -9,6 +9,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 
 
+# Retrieves user via username
 class StudentList(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
@@ -22,6 +23,7 @@ class StudentList(viewsets.ModelViewSet):
         return queryset
 
 
+# Retrieves student via authentication token
 class GetStudentByTokenView(APIView):
     def get(self, request, token, format=None):
         try:

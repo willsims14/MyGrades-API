@@ -11,11 +11,11 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 router = routers.DefaultRouter()
 
-router.register(r'students', views.StudentList)
-router.register(r'schools', views.SchoolList)
-router.register(r'professors', views.ProfessorList)
-router.register(r'courses', views.CourseList)
-router.register(r'assignments', views.AssignmentView)
+router.register(r'student', views.StudentList)
+router.register(r'school', views.SchoolList)
+router.register(r'professor', views.ProfessorList)
+router.register(r'course', views.CourseList)
+router.register(r'assignment', views.AssignmentView)
 
 
 app_name = "MyGrades"

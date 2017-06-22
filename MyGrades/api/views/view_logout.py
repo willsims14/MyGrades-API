@@ -8,14 +8,4 @@ from django.urls import reverse
 # those logged in can access the view.
 @login_required
 def user_logout(request):
-    """
-    This method is invoked to logout the user and redirect them to the index
-
-     ---Arguments---
-    None
-
-    Author: Beve Strownlee & Blaise Roberts
-    """
-
-    # Since we know the user is logged in, we can now just log them out.
     logout(request)
