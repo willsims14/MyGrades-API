@@ -10,11 +10,17 @@ MyGrades is an application for students to keeps track of the grades he or she r
 
 ## Dependencies
 You need to do a few things in order to use the MyGrades API:
-1. Clone repo: ```git clone https://github.com/willsims14/MyGrades-API.git```
-2. Change directory into MyGrades: ```cd MyGrades```
-3. Make Migrations: ```python manage.py makemigrations api```
-4. Migrate: ```python manage.py migrate```
-5. Run Server ```python manage.py runserver```
+1. Clone repo
+```git clone https://github.com/willsims14/MyGrades-API.git```
+2. Change directory into MyGrades
+```cd MyGrades```
+3. Make Migrations
+```python manage.py makemigrations api```
+4. Migrate
+```python manage.py migrate```
+5. Run Server
+```python manage.py runserver```
+
 Now, the API should be up and running on [port 8000](http://localhost:8000/)!
 
 ## Built With
